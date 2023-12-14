@@ -30,6 +30,13 @@ const NavItem = ({category, handleOpen, isAnyOpen, isOpen}: NavItemProps) => {
                     }/>
                 </Button>
             </div>
+            {isOpen ? (
+                <div className={cn('absolute inset-x-0 top-full text-sm text-muted-foreground',
+                {
+                    'animate-in fade-in-10 slide-in-from-top-5' : !isAnyOpen,
+                })}>
+                </div>
+            ) : null}
         </div>
     )
 }
