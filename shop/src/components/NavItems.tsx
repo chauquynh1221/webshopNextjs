@@ -1,16 +1,36 @@
 "use client"
 
 import { PRODUCT_CATEGORY } from "@/config"
-import { useState } from "react"
+import { KeyboardEvent, useEffect, useRef, useState } from "react"
 import NavItem from "./NavItem"
+import { useOnClickOutside } from "@/hooks/use-on-click-outside"
 
 const NavItems = () => {
     
     const [activeIndex, setActiveIndex] = useState<null | number>(null)
 
+    
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => {
+          if (e.key === 'Escape') {
+            setActiveIndex(null)
+          }
+        }
+    
+        document.addEventListener('keydown', handler)
+    
+        return () => {
+          document.removeEventListener('keydown', handler)
+        }
+      }, [])
+
     const isAnyOpen = activeIndex !== null
+
+    const Navref = useRef<HTMLDivElement | null>(null)
+
+    useOnClickOutside(Navref, () => setActiveIndex(null))
     return(
-        <div className='flex gap-4 h-full'>
+        <div className='flex gap-4 h-full' ref = {Navref}>
            {
             PRODUCT_CATEGORY.map((category, i) => {
                 const handleOpen = () =>{
