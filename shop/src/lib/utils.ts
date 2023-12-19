@@ -6,23 +6,39 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+
+export function formatCurrency(amount: number) {
+  const suffixes = ["", "K", "M", "B", "T"];
+
+  let tier = Math.log10(Math.abs(amount)) / 3 | 0;
+
+  if (tier === 0) return amount;
+
+  const suffix = suffixes[tier];
+
+  const scale = Math.pow(10, tier * 3);
+
+  const scaled = amount / scale;
+
+  return scaled.toString() + " " + suffix;
+}
 export function formatPrice(
   price: number | string,
   options: {
-    currency?: 'USD' | 'EUR' | 'GBP' | 'BDT'
+    currency?: 'VND' | 'EUR' | 'USD' | 'NDT'
     notation?: Intl.NumberFormatOptions['notation']
   } = {}
 ) {
-  const { currency = 'USD', notation = 'compact' } = options
+  const { currency = 'VND', notation = 'compact' } = options
 
   const numericPrice =
     typeof price === 'string' ? parseFloat(price) : price
 
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('vi-VN', {
     style: 'currency',
     currency,
     notation,
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 3,
   }).format(numericPrice)
 }
 

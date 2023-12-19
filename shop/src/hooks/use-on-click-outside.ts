@@ -13,7 +13,7 @@ export const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
         return;
       }
 
-      handler(event); // click bên ngoài phẩn từ đang
+      handler(event); // click bên ngoài phẩn từ đang mở 
     };
 
     document.addEventListener("mousedown", listener);
