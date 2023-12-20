@@ -4,6 +4,7 @@ import { Icons } from "./Icons"
 import NavItems from "./NavItems"
 import { buttonVariants } from "./ui/button"
 import Cart from "./Cart"
+import Image from "next/image"
 
 export const Narbar  = () => {
     const user = null
@@ -18,6 +19,7 @@ export const Narbar  = () => {
                             <div className='ml-4 flex lg:ml-0'>
                                 <Link href='/'>
                                     <Icons.logo className='h-10 w1-0'/>
+                                    
                                 </Link> 
                             </div>
                             <div className='hidden z-50 lg:ml-8 lg:block lg:self-stretch'>
